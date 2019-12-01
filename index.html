@@ -18,11 +18,11 @@
             <h2>Generate a Password</h2>
         </div>
         <div class="password">
-            <textarea readonly id="password" placeholder="Your Secure Password"
+            <textarea readonly id="display" placeholder="Your Secure Password"
                 aria-label="Generated Password"></textarea>
         </div>
         <div class="buttons">
-            <button id="generate">Generate Password</button>
+            <button id="generate" onclick="clearBox(this);">Generate Password</button>
             <button id="copy">Copy to Clipboard</button>
         </div>
     </main>

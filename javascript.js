@@ -1,20 +1,81 @@
 // The user will be prompted to choose from the following password criteria:
 
-// * Length (must be between 8 and 128 characters)
+var password = "";
 
-//* Character type:
+// Length (must be between 8 and 128 characters)
 
-  //* Special characters
+var passwordLength;
+var passwordLengthNum;
 
-  var specialChar = ["~","!","@","#","$","%","^","&","*","(",")","+","=","?","/","{","}","|","<",">",":",";",".",","]
-  //* Numeric characters
+// Special characters
 
-  var numeric = [1,2,3,4,5,6,7,8,9,0]
+var specialChar = "~!@#$%^&*()+=?/{}|<>:;.,[]";
 
-  //* Lowercase characters
+// Numeric characters
 
-  var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+var numeric = "1234567890";
 
-  //* Uppercase characters
+// Lowercase characters
 
-  var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+var lowerCase = "abcdefghijklmnopqrstuvwxyz";
+
+// Uppercase characters
+
+var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+// Generate Button
+
+var generateBtn = document.getElementById("generate");
+
+// Copy Button
+
+var copyBtn = document.getElementById("copy");
+
+// Function on generate button press
+
+// Clear Box
+
+generateBtn.onclick = function clearBox() {
+
+}
+
+//Password Specificiations
+
+generateBtn.onclick = function generatePW() {
+
+    // Password Length Prompt
+
+    passwordLength = window.prompt("How many characters in password? (8-128)");
+
+    passwordLengthNum = Number(passwordLength);
+
+    if (passwordLengthNum >= 8 && passwordLengthNum <= 128) {
+
+        // Lowercase confirm
+        lowerCaseConfirm = window.confirm("Would you like lowercase letters?");
+
+        // Uppercase confirm
+        upperCaseConfirm = window.confirm("Would you like uppercase letters?");
+
+        // Number confirm
+        numbericConfirm = window.confirm("Would you like numeric characters?");
+
+        // Special character confirm
+        specialCharConfirm = window.confirm("Would you like special characters?");
+
+    } else {
+        window.alert("Password length must be between 8 and 128 characters.");
+        generatePW ();
+    };
+
+    // Password Generation
+
+    for (var i = 0; i <= passwordLengthNum; i++) {
+        password = password + lowerCase.charAt(Math.floor(Math.random * Math.floor(lowerCase - 1)));
+    }
+
+    // Add password to display
+
+    document.getElementById("display").value = password;
+
+}
