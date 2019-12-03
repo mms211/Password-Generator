@@ -1,81 +1,142 @@
-// The user will be prompted to choose from the following password criteria:
+// Variables
 
 var password = "";
-
-// Length (must be between 8 and 128 characters)
-
 var passwordLength;
-var passwordLengthNum;
+var lowerCaseConfirm;
+var upperCaseConfirm;
+var numericConfirm;
+var specialCharConfirm;
+var generateBtn = document.querySelector("#generate");
+var copyBtn = document.querySelector("#copy");
 
-// Special characters
+// Arrays 
 
-var specialChar = "~!@#$%^&*()+=?/{}|<>:;.,[]";
+var passwordArr = [];
+var specialChar = ["~","!","@","#","$","%","^","&","*","(",")","+","=","?","/","{","}","|","<",">",":",";",".",",","[","]"];
+var numeric = [1,2,3,4,5,6,7,8,9,0];
+var lowerCase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var upperCase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
-// Numeric characters
+// Functions
 
-var numeric = "1234567890";
+// Password Length
 
-// Lowercase characters
-
-var lowerCase = "abcdefghijklmnopqrstuvwxyz";
-
-// Uppercase characters
-
-var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-// Generate Button
-
-var generateBtn = document.getElementById("generate");
-
-// Copy Button
-
-var copyBtn = document.getElementById("copy");
-
-// Function on generate button press
-
-// Clear Box
-
-generateBtn.onclick = function clearBox() {
-
-}
-
-//Password Specificiations
-
-generateBtn.onclick = function generatePW() {
-
-    // Password Length Prompt
-
+function pwLength() {
     passwordLength = window.prompt("How many characters in password? (8-128)");
-
-    passwordLengthNum = Number(passwordLength);
-
-    if (passwordLengthNum >= 8 && passwordLengthNum <= 128) {
-
-        // Lowercase confirm
-        lowerCaseConfirm = window.confirm("Would you like lowercase letters?");
-
-        // Uppercase confirm
-        upperCaseConfirm = window.confirm("Would you like uppercase letters?");
-
-        // Number confirm
-        numbericConfirm = window.confirm("Would you like numeric characters?");
-
-        // Special character confirm
-        specialCharConfirm = window.confirm("Would you like special characters?");
-
+    passwordLength = Number(passwordLength);
+    if (passwordLength >= 8 && passwordLength <= 128) {
+        console.log(passwordLength);
+        return;
     } else {
         window.alert("Password length must be between 8 and 128 characters.");
-        generatePW ();
+        pwLength();
     };
-
-    // Password Generation
-
-    for (var i = 0; i <= passwordLengthNum; i++) {
-        password = password + lowerCase.charAt(Math.floor(Math.random * Math.floor(lowerCase - 1)));
-    }
-
-    // Add password to display
-
-    document.getElementById("display").value = password;
-
 }
+
+// Lowercase Letters
+
+function lowLetters() {
+    lowerCaseConfirm = window.confirm("Would you like lowercase letters?");
+    console.log(lowerCaseConfirm);
+    return;
+}
+
+// Uppercase Letters
+
+function upLetters() {
+    upperCaseConfirm = window.confirm("Would you like uppercase letters?");
+    console.log(upperCaseConfirm);
+    return;
+}
+
+// Numbers
+
+function numCharacters() {
+    numericConfirm = window.confirm("Would you like numeric characters?");
+    console.log(numericConfirm);
+    return;
+}
+
+// Special Characters
+
+function specCharacters() {
+    specialCharConfirm = window.confirm("Would you like special characters?");
+    console.log(specialCharConfirm);
+    return;
+}
+
+// Character Specification 
+
+function charSpec() {
+    lowLetters();
+    upLetters();
+    numCharacters();
+    specCharacters();
+}
+
+// Password Array Creation
+
+function passArrGen() {
+    if (lowerCaseConfirm === true) {
+        passwordArr = passwordArr.concat(lowerCase);
+        console.log(passwordArr);
+    }
+    if (upperCaseConfirm === true) {
+        passwordArr = passwordArr.concat(upperCase);
+        console.log(passwordArr);
+    }
+    if (numericConfirm === true) {
+        passwordArr = passwordArr.concat(numeric);
+        console.log(passwordArr);
+    }
+    if (specialCharConfirm === true) {
+        passwordArr = passwordArr.concat(specialChar);
+    }
+    return;
+}
+
+// Pasword Generation
+
+function generatePW() {
+    password = "";
+    for (var i = 0; i <= passwordLength; i++) {
+        password = password + passwordArr[Math.floor(Math.random() * Math.floor(passwordArr.length - 1))];
+        console.log(password);
+        displayPassword();
+}};
+
+// Check atleast one character type is selected
+
+function checkChar() {
+    if (lowerCaseConfirm === false && upperCaseConfirm === false && numericConfirm === false && specialCharConfirm === false) {
+        window.alert("Password must contain atleast one character type.");
+        charSpec();
+    } else {
+        passArrGen();
+        generatePW();
+    }
+}
+
+// Add Password to Display
+
+function displayPassword() {
+    document.querySelector("#display").textContent = password;
+}
+
+// Copy to Clipboard
+
+function copyPassword() {
+    document.getElementById("display").select();
+    document.execCommand("copy");
+    alert("Password copied to clipboard!");
+}
+
+// Call Functions
+
+generateBtn.addEventListener("click", function clickGenBtn() {
+    pwLength();
+    charSpec();
+    checkChar();
+});
+
+copyBtn.addEventListener("click", copyPassword);  
