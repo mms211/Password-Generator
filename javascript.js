@@ -77,6 +77,7 @@ function charSpec() {
 // Password Array Creation
 
 function passArrGen() {
+    passwordArr = [];
     if (lowerCaseConfirm === true) {
         passwordArr = passwordArr.concat(lowerCase);
         console.log(passwordArr);
