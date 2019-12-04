@@ -99,7 +99,7 @@ function passArrGen() {
 
 function generatePW() {
     password = "";
-    for (var i = 0; i <= passwordLength; i++) {
+    for (var i = 0; i <= passwordLength - 1; i++) {
         password = password + passwordArr[Math.floor(Math.random() * Math.floor(passwordArr.length - 1))];
         console.log(password);
         displayPassword();
