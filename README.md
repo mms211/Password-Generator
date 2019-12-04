@@ -11,6 +11,8 @@ There is also a function to copy the pasword to clipboard.
 
 ## Screen Shots
 
+<img width="1429" alt="Screen Shot 2019-12-03 at 6 49 38 PM" src="https://user-images.githubusercontent.com/54684022/70101113-f20df200-1601-11ea-8c04-1ab27be7ddec.png">
+
 ## Link
 
 https://mms211.github.io/Password-Generator/
